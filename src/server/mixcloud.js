@@ -2,41 +2,44 @@
 
 const request = require('request');
 
-const location = {
-    protocol: 'https:',
-    baseUrl: 'www.mixcloud.com'
+const mcSettings = {
+    baseUrl: 'https://www.mixcloud.com',
+    json: true
 };	
 
-
-const getTracklist = function(mixPath){
-
+ 	
+function getTracklist(mixPath){
+    mcSettings.uri = '/player/details';
+    mcSettings.qs = {'key': mixPath };
+    
     return new Promise((resolve,reject) => {
-	
-	request({
-	    "uri": "/player/details",
-	    "baseUrl": location.protocol + "//" + location.hostname,
-	    "qs": { "key": mixPath },
-	    "json": true
-	}, (error, response, data) => {
-	    if (!error && response.statusCode === 200 && data.cloudcast.sections.length > 0) {
-		data.cloudcast.sections.forEach((track)=>{
-		    tracklist.push({artist:track.artist,title:track.title});
- 		}).then(()=>{
-		   resolve(tracklist); 
-		});
-	    } else {
-		reject(new Error(error));
+	request(mcSettings,(error, response, data) => {
+	    try {
+		if (!error && response.statusCode === 200 && data.cloudcast.sections.length > 0) {
+		    resolve(data);
+		}
+		else {
+		    let err = new Error('Error retrieving Tracklist from Mixcloud');
+		    err.requestError = error;
+		    err.statusCode = response.statusCode;
+		    err.dataLength = data.cloudcast !==undefined && data.cloudcast.sections!==undefined ? data.cloudcast.sections.length : 0;
+		    reject(err);
+		}	    
+	    } catch(e) {
+		reject(e);		
 	    }
 	});
-	
     });
-}
+};
 
-(async () => {
-    try {
-	let tracklist = await getTracklist();
-	console.log(tracklist);
+async function rip() {
+    try{
+	var data = await getTracklist('/BBCEssentialMix/helena-hauff-essential-mix-25022017/');
+	console.log(data);
     } catch(e) {
-	console.log(error);
+	console.log('ERRRANU',e.requestError, e.statusCode, e.dataLength,e);		
     }
-});
+};
+
+rip();
+console.log('tracklist:');
