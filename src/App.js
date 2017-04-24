@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SoundCloudLogin from './SoundCloudLogin/SoundCloudLogin';
+import MixCloudLogin from './MixCloudLogin/MixCloudLogin';
 import './App.css';
 
 /* TrackMist React App
@@ -16,9 +16,9 @@ class App extends Component {
           <h2>TrackMist</h2>
         </div>
         <p className="App-intro">
-          To get started, login to your SoundCloud account
+          To get started, enter your MixCloud account username
         </p>
-	<SoundCloudLogin />
+	<MixCloudLogin />
       </div>
     );
   }

@@ -5,7 +5,7 @@
   "dependencies": {
     "phantom": "^4.0.2",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4",
+    "react-dom": "^15.5.4"
   },
   "devDependencies": {
     "chai": "^3.5.0",
