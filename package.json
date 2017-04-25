@@ -29,7 +29,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom && node_modules/.bin/babel-node node_modules/.bin/babel-istanbul cover node_modules/.bin/_mocha -- src/server/mixcloud.test.js",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
 }

@@ -1,5 +1,5 @@
 'use strict';
-
+// TODO: run tests with:  mocha --require babel-polyfill --compilers js:babel-register
 const http = require('http');
 
 const MixCloud = require('../src/server/mixcloud.js');
@@ -9,25 +9,6 @@ const should = chai.should();
 const sinon = require('sinon');
 const mockMix = require('./_mock/blackestEverBlack.json');
 const mockUser = require('./_mock/likedTracksUserLyingFlotus.json');
-
-const mockData = rawJSON => {
-
-    /*
-       Tiny utility fn for saving JSON data for mocking
-     */
-
-    const fs = require('fs');
-    const util = require('util');
-    
-    fs.writeFile('./'+likedMixList.data[i].name+'.json', JSON.stringify(util.inspect(rawJSON)) , 'utf-8', function(err) {
-	if(err) {
-	    return console.log(err);
-	}
-
-    }); 
-
-    
-}
 
 describe('MixCloud', function(done) {
     before(function(){
