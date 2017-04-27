@@ -1,6 +1,6 @@
 {
     "paging": {
-        "previous": "http://api.mixcloud.com/lyingflotus/listens/?limit=20&since=2017-04-16+17%3A33%3A03"
+        "previous": "http://mock.mixcloud.com/lyingflotus/listens/?limit=20&since=2017-04-16+17%3A33%3A03"
     }, 
     "data": [
         {
