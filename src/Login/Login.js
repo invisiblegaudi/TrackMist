@@ -21,7 +21,6 @@ class Login extends Component {
     handleChange(event) {
 	let stateChange = {};
 	let error = this.state.errors.indexOf(event.target.name) >= 0 ? true : false; // field has error?
-	console.debug(event.target.value.length);
 	if(event.target.value.length) { // field valid if field not empty
 	    if(error) this.state.errors.splice(this.state.errors.indexOf(error),1); // remove error for that field
 	} else {
@@ -29,12 +28,12 @@ class Login extends Component {
 	    this.state.showErrors = true;
 	}
 	stateChange[event.target.name] = event.target.value; // update field value
-	this.setState({...stateChange,...this.state}); // update state
+	this.setState({...this.state,...stateChange}); // update state
     }
 
     handleLogin() {
 	if(!this.state.errors.length) {
-	    this.props.passedValidation();
+	    this.props.passedValidation(this.state.username);
 	} else {
 	    this.setState({...this.state,...{showErrors: true}});
 	}

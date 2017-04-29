@@ -1,3 +1,4 @@
+import request from 'request';
 import React, { Component } from 'react';
 import Login from '../Login/Login';
 
@@ -11,15 +12,29 @@ class MixCloudLogin extends Component {
     
     constructor(props) {
 	super(props);
+	    console.log(props)
     }
 
-    login() {
-	// send user to backend
+    login = (username) => {
+	request(`${window.location.protocol}//${window.location.hostname}:5050/mixcloud/user/${username}`+'',(err,res,body)=>{
+	    console.log(res)
+	    console.log(body)
+	    if(err) {
+		console.log(err)
+		this.props.showMessage('Error connecting to TrackMist API')
+	    } else {
+		if(res.length>0) {
+		    this.props.loadDashboard(res)
+		} else {
+		    this.props.showMessage('Sorry, this user has no data')
+		}
+	    }
+	});
     }
-    
+	
     render(){
 	return (
-	    <Login title="Import MixCloud User Data" passedValidation={()=>{this.login()}} />
+	    <Login title="Import MixCloud User Data" passedValidation={this.login} />
 	);
     };
 }

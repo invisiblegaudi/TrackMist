@@ -10,19 +10,35 @@ import './App.css';
 */
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <h2>TrackMist</h2>
-        </div>
-        <p className="App-intro">
-          To get started, enter your MixCloud account username
-        </p>
-	<MixCloudLogin />
-	<Dashboard />
-      </div>
-    );
+
+    constructor(props) {
+	super(props)
+	this.state = {};
+	this.state.introText = 'To get started, enter your MixCloud account username';
+    }
+    
+    changeIntroText = (text) => {
+	
+	this.setState({introText:text})
+    }
+
+    loadDashboard = (userData) => {
+	console.log(userData)
+    }
+    
+    render() {
+	return (
+	    <div className="App">
+            <div className="App-header">
+            <h2>TrackMist</h2>
+            </div>
+            <p className="App-intro">
+	    {this.state.introText}
+            </p>
+	    <MixCloudLogin showMessage={this.changeIntroText} />
+	    <Dashboard />
+	    </div>
+	);
   }
 }
 

@@ -13,10 +13,17 @@ const MixCloud = require('./classes/mixcloud');
 const express = require('express');
 const api = express();
 
+const log =  require('./logger');
+
+api.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 api.get('/mixcloud/user/:user?',
 
 	async function mixcloudUser(req,res){
-	    
 	    /*
 	       request for MixCloud User Data
 	       return data for front end
@@ -52,8 +59,6 @@ const server = api.listen(config.TCP1,()=>{
     if(config.TCP1===undefined) {
         error('no port defined!!');
     }
-
-    if(process.env.test === 'true') setTimeout(test(api),0);
 });
 
 module.exports = {server,MixCloud}
