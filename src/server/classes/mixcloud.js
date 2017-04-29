@@ -1,6 +1,7 @@
 'use strict';
 
 const request = require('request');
+const log = require('../logger');
 
 class MixCloud {
 
@@ -23,29 +24,19 @@ class MixCloud {
 	this.likedMixList = []; // list of mixes liked by user
 	this.likedMixListPaths = []; // paths of mixes liked by user
 	this.request = request; // expose request to outside for mocking
-  		
+ 		
     }
         
     getUserLikes(user) {
 	/* 
 	 *  Get tracklist for mix
 	 *  @author john@invisiblearchitects.com
-	 *  @param{string} user - mixcloud username
+	 *  @param {string} user - mixcloud username
 	 */
 	return new Promise((resolve,reject) => {
 	    this.settings.uri = '/'+user+'/favorites/';
 	    try {
-		this.request.get(this.settings,(error, response, body) => {
-		    /* const fs = require('fs');
- 		       fs.writeFile('_user_likes_res.json', JSON.stringify(response), (err) => {
-		       if (err) throw err;
-		       console.log('The file has been saved!');
-		       });
-		       fs.writeFile('_user_likes_data.json',JSON.stringify(data), (err) => {
-		       if (err) throw err;
-		       console.log('The file has been saved!');
-		       });
-		       console.log(data);*/
+		this.request.get(this.settings,(error, response, body) => { 
 		    if (!error) {
 			this.likedMixList = body.data;
 			this.likedMixListPaths = body.data.map(mix=>{return mix.key});
@@ -98,7 +89,10 @@ class MixCloud {
 	/* returns list of mixes liked by user with tracks
 	   @param {string} - user
 	   @returns {Object} - Mix and tracks list
-	 */	
+	 */
+	if(!this.likedMixList.length) {
+	    this.getUserLikes(user)
+	}
 	try{
   	    for(let i=0; i<this.likedMixList.length; i++){
 		this.likedTrackList = await this.getTracklist(this.likedMixList[i].key);
