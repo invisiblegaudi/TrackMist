@@ -3,7 +3,7 @@ import styles from './SoundCloudLogin.css';
 
 /* 
  *  Login Panel for SoundCloud credentials
- *  @author john@invisibilearchitects.com
+ *  @author john@invisiblearchitects.com
  * 
 */
 
@@ -29,7 +29,6 @@ class SoundCloudLogin extends Component {
 	} else {
 	    if(!error) this.state.errors.push(event.target.name); // add error for that field
 	}
-	console.log(event.target.name,event.target.value);
 	stateChange[event.target.name] = event.target.value; // update field value
 	this.setState({...stateChange,...this.state}); // update state
     }

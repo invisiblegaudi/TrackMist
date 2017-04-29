@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MixCloudLogin from './MixCloudLogin/MixCloudLogin';
+import Dashboard from './Dashboard/Dashboard';
 import './App.css';
 
 /* TrackMist React App
@@ -19,6 +20,7 @@ class App extends Component {
           To get started, enter your MixCloud account username
         </p>
 	<MixCloudLogin />
+	<Dashboard />
       </div>
     );
   }

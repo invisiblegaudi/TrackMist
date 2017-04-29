@@ -30,7 +30,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "mocha --require babel-polyfill --compilers js:babel-register && react-scripts test --env=jsdom",
+    "jest": "react-scripts test --env=jsdom",
+    "mocha": "mocha -w",
     "eject": "react-scripts eject"
   }
 }
