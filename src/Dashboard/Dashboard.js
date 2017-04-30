@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styles from './Dashboard.css';
 
 /* 
  *  Dashboard for user info
@@ -9,15 +8,19 @@ import styles from './Dashboard.css';
 
 class Dashboard extends Component {
 
-    constructor(props) {
-	super(props);
-    }
-    
     render(){
-
-	
+	console.log(this.props.mixcloud)
 	return (
-	    <div className="Dashboard"></div>
+	    <div className="Dashboard">
+	    <ul>
+	    {this.props.mixcloud.map(mix=>{
+		return <li>{mix.name}
+		<ul>{mix.tracklist.map(track=>{return <li>{track.artist} - {track.title}</li> })}
+		</ul>
+		</li>
+	    })}
+	    </ul>
+	    </div>
 	)
     }
 }

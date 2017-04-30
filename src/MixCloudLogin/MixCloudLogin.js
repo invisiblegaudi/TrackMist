@@ -16,11 +16,9 @@ class MixCloudLogin extends Component {
     }
 
     login = (username) => {
-	request(`${window.location.protocol}//${window.location.hostname}:5050/mixcloud/user/${username}`+'',(err,res,body)=>{
-	    console.log(res)
-	    console.log(body)
+	request(`${window.location.protocol}//${window.location.hostname}:5050/mixcloud/user/${username}`,(err,res,body)=>{
+	    this.props.sendData(JSON.parse(body))
 	    if(err) {
-		console.log(err)
 		this.props.showMessage('Error connecting to TrackMist API')
 	    } else {
 		if(res.length>0) {

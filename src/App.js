@@ -15,6 +15,7 @@ class App extends Component {
 	super(props)
 	this.state = {};
 	this.state.introText = 'To get started, enter your MixCloud account username';
+	this.mixcloudData = []
     }
     
     changeIntroText = (text) => {
@@ -22,8 +23,9 @@ class App extends Component {
 	this.setState({introText:text})
     }
 
-    loadDashboard = (userData) => {
+    loadMixcloudData = (userData) => {
 	console.log(userData)
+	this.mixcloudData = userData
     }
     
     render() {
@@ -35,8 +37,8 @@ class App extends Component {
             <p className="App-intro">
 	    {this.state.introText}
             </p>
-	    <MixCloudLogin showMessage={this.changeIntroText} />
-	    <Dashboard />
+	    <MixCloudLogin showMessage={this.changeIntroText} sendData={this.loadMixcloudData} />
+	    <Dashboard mixcloud={this.mixcloudData}  />
 	    </div>
 	);
   }
