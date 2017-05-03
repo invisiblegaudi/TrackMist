@@ -17,7 +17,7 @@ class MixCloudLogin extends Component {
 		this.props.showMessage('Error connecting to TrackMist API')
 	    } else {
 		if(body.length>0) {
-		    this.props.showMessage(`${username}, you liked these tracks on MixCloud` )
+		    this.props.showMessage(`${username}, you liked these mixes on MixCloud` )
 		} else {
 		    this.props.showMessage('Sorry, this user has no data')
 		}

@@ -19,6 +19,9 @@ class App extends Component {
 	this.state.introText = 'To get started, enter your MixCloud account username'
 	this.mixcloudData = []
 	this.lastfmLogin = 'hidden'
+	if(localStorage.mixcloudUserData){
+	    this.mixcloudData = JSON.parse(localStorage.mixcloudUserData)
+	}
     }
     
     changeIntroText = (text) => {
@@ -27,6 +30,7 @@ class App extends Component {
 
     loadMixcloudData = (userData) => {
 	this.mixcloudData = userData
+	localStorage.mixcloudUserData = JSON.stringify(userData)
 	this.lastfmLogin = 'visible'
     }
     
@@ -40,7 +44,7 @@ class App extends Component {
 	    {this.state.introText}
             </p>
 	    <MixCloudLogin showMessage={this.changeIntroText} sendData={this.loadMixcloudData} />
-	    <LastFMLogin display={this.lastfmLogin} />
+	    <LastFMLogin authButton={this.auth} />
 	    <Dashboard mixcloud={this.mixcloudData} />
 	    </div>
 	)

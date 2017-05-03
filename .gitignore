@@ -19,3 +19,7 @@ yarn-error.log*
 #emacs
 *.*~
 *.*#
+
+#config
+*.config.json
+*.config.js
