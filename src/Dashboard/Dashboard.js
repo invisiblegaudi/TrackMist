@@ -9,12 +9,11 @@ import React, { Component } from 'react';
 class Dashboard extends Component {
 
     render(){
-	console.log(this.props.mixcloud)
 	return (
 	    <div className="Dashboard">
 	    <ul>
 	    {this.props.mixcloud.map(mix=>{
-		return <li>{mix.name}
+		return <li class="mix"><strong>Mix: {mix.name}</strong>
 		<ul>{mix.tracklist.map(track=>{return <li>{track.artist} - {track.title}</li> })}
 		</ul>
 		</li>

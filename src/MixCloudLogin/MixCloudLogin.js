@@ -10,19 +10,14 @@ import Login from '../Login/Login';
 
 class MixCloudLogin extends Component {
     
-    constructor(props) {
-	super(props);
-	    console.log(props)
-    }
-
     login = (username) => {
 	request(`${window.location.protocol}//${window.location.hostname}:5050/mixcloud/user/${username}`,(err,res,body)=>{
 	    this.props.sendData(JSON.parse(body))
 	    if(err) {
 		this.props.showMessage('Error connecting to TrackMist API')
 	    } else {
-		if(res.length>0) {
-		    this.props.loadDashboard(res)
+		if(body.length>0) {
+		    this.props.showMessage(`${username}, you liked these tracks on MixCloud` )
 		} else {
 		    this.props.showMessage('Sorry, this user has no data')
 		}
@@ -32,7 +27,7 @@ class MixCloudLogin extends Component {
 	
     render(){
 	return (
-	    <Login title="Import MixCloud User Data" passedValidation={this.login} />
+	    <Login id="mixcloud" title="Import MixCloud User Data" passedValidation={this.login} />
 	);
     };
 }

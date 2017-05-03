@@ -41,7 +41,7 @@ class Login extends Component {
     
     render(){
 	return (
-	    <div className="Login">
+	    <div className="Login" style={this.props.style}>
 	    <div id="errors" className={this.state.errors.length && this.state.showErrors ? 'show' : ''}>
 	    <p>Please correct field(s):{this.state.errors}</p>
 	    <ul id="errorList">{this.state.errors.map(field => {
